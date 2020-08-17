@@ -4,7 +4,7 @@
 
 # usage
 
-`wget https://raw.githubusercontent.com/kong5664546498/half_a_wheel/master/wheel/onekey-omzsh/onekey-omzsh.sh && chmod +x onekey-omzsh.sh && ./onekey-omzsh.sh`
+`wget https://raw.githubusercontent.com/afret0/onekey_zsh/master/onekey-omzsh.sh && chmod +x onekey-omzsh.sh && ./onekey-omzsh.sh`
 
 
 
