@@ -4,7 +4,19 @@
 
 # usage
 
-`wget https://raw.githubusercontent.com/afret0/onekey_zsh/master/onekey-omzsh.sh && chmod +x onekey-omzsh.sh && ./onekey-omzsh.sh`
+root 用户:
+
+`wget https://raw.githubusercontent.com/afret0/onekey_zsh/master/onekey-omzsh.sh && bash onekey-omzsh.sh`
+
+普通用户(需要 sudo):
+
+`wget https://raw.githubusercontent.com/afret0/onekey_zsh/master/onekey-omzsh.sh && bash onekey-omzsh.sh`
+
+或管道一键执行:
+
+`curl -fsSL https://raw.githubusercontent.com/afret0/onekey_zsh/master/onekey-omzsh.sh | bash`
+
+> 支持 apt-get / dnf / yum 的 Linux; 可重复执行(已装的包/oh-my-zsh/插件自动跳过); 已存在的 `.zshrc` 会备份为 `.zshrc.bk` 再替换.
 
 
 
