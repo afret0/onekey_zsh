@@ -94,6 +94,10 @@ valid_account() {
     [[ $1 =~ ^[A-Za-z0-9_.-]{1,64}$ ]]
 }
 
+valid_pass() {
+    [[ $1 =~ ^[!-~]{1,64}$ ]]
+}
+
 valid_domain() {
     local re='^([A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z][A-Za-z0-9-]{0,61}[A-Za-z0-9]$'
     [ "${#1}" -le 253 ] && [[ $1 =~ $re ]]
@@ -192,7 +196,7 @@ load_existing() {
     else
         info "已有配置中的用户名不合法 (值: ${old_user:-空})，默认值仍为 ${DEFAULT_USER}"
     fi
-    if valid_account "$old_pass"; then
+    if valid_pass "$old_pass"; then
         default_pass=$old_pass
     else
         info "已有配置中的密码不合法 (值: ${old_pass:-空})，默认值仍为 ${DEFAULT_PASS}"
@@ -277,7 +281,7 @@ choose_account() {
         info "用户名: ${user}"
     fi
     if [ -n "${WEBDAV_PASS:-}" ]; then
-        valid_account "$WEBDAV_PASS" || fail "环境变量 WEBDAV_PASS 不合法 (只允许字母/数字/_.-，长度 1-64)"
+        valid_pass "$WEBDAV_PASS" || fail "环境变量 WEBDAV_PASS 不合法 (允许字母/数字/符号等可见 ASCII 字符, 不含空格, 长度 1-64)"
         pass=$WEBDAV_PASS
         info "密码: 已设置 (来自环境变量 WEBDAV_PASS)"
     elif ! has_tty; then
@@ -287,8 +291,8 @@ choose_account() {
         while true; do
             read -r -p "密码 (默认 ${default_pass}): " pass </dev/tty || pass=""
             pass=${pass:-$default_pass}
-            valid_account "$pass" && break
-            info "密码不合法 (只允许字母/数字/_.-，长度 1-64)，请重新输入"
+            valid_pass "$pass" && break
+            info "密码不合法 (允许字母/数字/符号等可见 ASCII 字符, 不含空格, 长度 1-64)，请重新输入"
         done
         info "密码: 已设置"
     fi
@@ -1046,7 +1050,7 @@ load_state_strict() {
     valid_port "$port" || fail "已安装配置中的端口不合法 (值: ${port:-空})，请重新执行安装命令"
     port=$((10#$port))
     valid_account "$user" || fail "已安装配置中的用户名不合法，请重新执行安装命令"
-    valid_account "$pass" || fail "已安装配置中的密码不合法，请重新执行安装命令"
+    valid_pass "$pass" || fail "已安装配置中的密码不合法，请重新执行安装命令"
     valid_dir "$data_dir" || fail "已安装配置中的数据目录不合法 (值: ${data_dir:-空})，请重新执行安装命令"
     tls_choice=$(parse_yes_no "${tls_choice:-n}") || fail "已安装配置中的 HTTPS 状态不合法，请重新执行安装命令"
     if [ "$tls_choice" = y ]; then

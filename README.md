@@ -59,7 +59,7 @@ root 用户:
 | 环境变量 | 说明 | 默认值 |
 | --- | --- | --- |
 | `WEBDAV_PORT` | dufs 监听端口, 1-65535 | `5000`, 重装时为已安装值 |
-| `WEBDAV_USER` / `WEBDAV_PASS` | 账号密码 (字母/数字/`_.-`, 1-64 位) | `admin` / `admin`, 重装时为已安装值 |
+| `WEBDAV_USER` / `WEBDAV_PASS` | 用户名: 字母/数字/`_.-`, 1-64 位; 密码: 额外允许符号 (如 `QPZM2745*1`, 全部可见 ASCII 字符, 不含空格, 1-64 位) | `admin` / `admin`, 重装时为已安装值 |
 | `WEBDAV_DIR` | 数据目录 (绝对路径, 不含空格和冒号) | `/data/webdav`, 重装时为已安装值 |
 | `WEBDAV_TLS` | 是否开启 HTTPS, `y` / `n` | `n`, 重装时为已安装状态 |
 | `WEBDAV_DOMAIN` | HTTPS 域名, 开启 HTTPS 时必填 (需解析到本机) | 重装时为已安装值 |
