@@ -95,6 +95,7 @@ valid_account() {
 }
 
 valid_pass() {
+    local LC_ALL=C
     [[ $1 =~ ^[!-~]{1,64}$ ]]
 }
 
